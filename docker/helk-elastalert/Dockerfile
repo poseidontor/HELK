@@ -42,7 +42,7 @@ RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
   && pip3 install -r requirements.txt \
   && python3 setup.py install \
   # ********* Download SIGMA *******************
-  && git clone https://github.com/Cyb3rWard0g/sigma.git -b helk_neu5ron_updates ${ESALERT_SIGMA_HOME}
+  && git clone https://github.com/poseidontor/sigma.git ${ESALERT_SIGMA_HOME}
 
 # ********* Copy Elastalert files **************
 COPY scripts/* ${ESALERT_HOME}/
