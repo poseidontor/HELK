@@ -16,33 +16,34 @@ ENV ESALERT_SIGMA_HOME=/opt/sigma
 # *********** Installing Prerequisites ***************
 # -qq : No output except for errors
 RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
-  python3.6 \
   libmagic-dev \
   build-essential \
-  python3-setuptools \
+  python3-setuptools
+RUN apt-get install -qqy --no-install-recommends \
   git \
   python3-pip \
   python3-dev \
   python3-setuptools \
   tzdata \
+  curl
   # ********* Clean ****************************
-  && apt-get -qy clean \
+RUN apt-get -qy clean \
   autoremove \
-  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /var/lib/apt/lists/*
   # ********* Install Elastalert **************
-  && git clone https://github.com/Yelp/elastalert.git ${ESALERT_HOME} \
+RUN git clone https://github.com/jertel/elastalert2.git ${ESALERT_HOME} \
   && bash -c 'mkdir -pv /etc/elastalert/rules' \
-  && cd ${ESALERT_HOME} \
-  && sudo pip3 install --upgrade pip \
-  && sudo pip3 install --upgrade setuptools \
+  && cd ${ESALERT_HOME}
+RUN pip3 install --upgrade setuptools \
   && pip3 install urllib3 \
-  && pip3 install -U enum34 \
+  && pip3 install -U enum34
   #TODO: temporary fix  https://github.com/Yelp/elastalert/issues/2725 also https://github.com/Cyb3rWard0g/HELK/issues/505
-  && pip3 install --force-reinstall elasticsearch==7.0.0 \
-  && pip3 install -r requirements.txt \
-  && python3 setup.py install \
+  #&& pip3 install --force-reinstall elasticsearch==7.0.0 \
+RUN cd ${ESALERT_HOME} && pip3 install -r requirements.txt
+RUN cd ${ESALERT_HOME} && python3 setup.py install
   # ********* Download SIGMA *******************
-  && git clone https://github.com/poseidontor/sigma.git ${ESALERT_SIGMA_HOME}
+RUN git clone https://github.com/poseidontor/sigma.git ${ESALERT_SIGMA_HOME}
+
 
 # ********* Copy Elastalert files **************
 COPY scripts/* ${ESALERT_HOME}/
