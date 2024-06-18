@@ -3,9 +3,8 @@
 # Author: Vighnesh Raje (@poseidontor)
 # License: GPL-3.0
 
-#FROM otrf/helk-base:latest
 FROM python:3.12-slim
-LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
+LABEL maintainer="Vighnesh Raje @poseidontor"
 LABEL description="Dockerfile base for the HELK Elastalert."
 
 ENV ESALERT_GID=910
@@ -45,6 +44,8 @@ RUN cd ${ESALERT_HOME} && python3 setup.py install
   # ********* Download SIGMA *******************
 RUN git clone https://github.com/poseidontor/sigma.git ${ESALERT_SIGMA_HOME}
 
+RUN pip3 install ruamel.yaml==0.18.6 \
+  pip3 install sigma==0.0.1
 # ********* Copy Elastalert files **************
 COPY scripts/* ${ESALERT_HOME}/
 COPY config.yaml ${ESALERT_HOME}/
