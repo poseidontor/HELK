@@ -1,9 +1,10 @@
 # HELK script: HELK Elastalert Dockerfile
 # HELK build Stage: Alpha
-# Author: Roberto Rodriguez (@Cyb3rWard0g)
+# Author: Vighnesh Raje (@poseidontor)
 # License: GPL-3.0
 
-FROM otrf/helk-base:latest
+#FROM otrf/helk-base:latest
+FROM python:3.12-slim
 LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
 LABEL description="Dockerfile base for the HELK Elastalert."
 
@@ -24,8 +25,7 @@ RUN apt-get install -qqy --no-install-recommends \
   python3-pip \
   python3-dev \
   python3-setuptools \
-  tzdata \
-  curl
+  tzdata
   # ********* Clean ****************************
 RUN apt-get -qy clean \
   autoremove \
@@ -43,7 +43,6 @@ RUN cd ${ESALERT_HOME} && pip3 install -r requirements.txt
 RUN cd ${ESALERT_HOME} && python3 setup.py install
   # ********* Download SIGMA *******************
 RUN git clone https://github.com/poseidontor/sigma.git ${ESALERT_SIGMA_HOME}
-
 
 # ********* Copy Elastalert files **************
 COPY scripts/* ${ESALERT_HOME}/
