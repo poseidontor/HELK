@@ -47,6 +47,7 @@ RUN cd ${ESALERT_HOME} && python3 setup.py install
   # ********* Download SIGMA *******************
 RUN git clone https://github.com/poseidontor/sigma.git ${ESALERT_SIGMA_HOME}
 
+
 # ********* Copy Elastalert files **************
 COPY scripts/* ${ESALERT_HOME}/
 COPY config.yaml ${ESALERT_HOME}/
