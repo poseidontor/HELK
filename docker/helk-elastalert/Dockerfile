@@ -25,7 +25,8 @@ RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
   python3-pip \
   python3-dev \
   python3-setuptools \
-  tzdata
+  tzdata \
+  curl
 
   # ********* Clean ****************************
 RUN apt-get -qy clean \
