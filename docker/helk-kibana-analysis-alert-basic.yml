@@ -194,7 +194,7 @@ services:
     networks:
       helk:
   helk-elastalert:
-    image: docker.io/library/helk-elastalert:1.0.2 
+    image: docker.io/library/helk-elastalert:1.0.3 
     container_name: helk-elastalert
     logging:
       driver: "json-file"
