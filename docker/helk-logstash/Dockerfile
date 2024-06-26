@@ -20,8 +20,8 @@ RUN chown logstash:logstash "${plugins_time_file}"
 COPY --chown=logstash:logstash plugins/helk-offline-logstash-codec_and_filter_plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins.zip
 COPY --chown=logstash:logstash plugins/helk-offline-logstash-input-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-input-plugins.zip
 COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-output-plugins.zip
-RUN logstash-plugin update \
-    && logstash-plugin install file:///usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins.zip \
+RUN logstash-plugin update
+RUN logstash-plugin install file:///usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins.zip \
     && logstash-plugin install file:///usr/share/logstash/plugins/helk-offline-logstash-input-plugins.zip \
     && logstash-plugin install file:///usr/share/logstash/plugins/helk-offline-logstash-output-plugins.zip \
     && rm -f /usr/share/logstash/pipeline/logstash.conf
