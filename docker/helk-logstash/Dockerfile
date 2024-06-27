@@ -14,6 +14,7 @@ COPY --chown=logstash:logstash config /usr/share/logstash/config
 
 # Build with plugins baked in
 ENV plugins_time_file="/usr/share/logstash/helk-plugins-updated-timestamp.txt"
+ENV DEBUG=1
 RUN printf "%s" "$(date +"%Y-%m-%d %T")" > "${plugins_time_file}"
 RUN chown logstash:logstash "${plugins_time_file}"
 
